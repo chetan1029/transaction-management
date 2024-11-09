@@ -8,7 +8,6 @@ class NoSlashRouter(SimpleRouter):
         super().__init__()
         self.trailing_slash = '/?'
 
-#router = SimpleRouter(trailing_slash=False)
 router = NoSlashRouter()
 router.register(r'accounts', AccountViewSet, basename='account')
 router.register(r'transactions', TransactionViewSet, basename='transaction')

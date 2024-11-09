@@ -19,3 +19,13 @@ pip3 install -r requirements.txt && python3 manage.py migrate
 ```bash
 python3 manage.py runserver
 ```
+
+4. Run test.
+
+```bash
+python3 manage.py test app.account.tests
+```
+5. Time spend 
+```bash
+1 hour 35 mins (excluding setup)
+```

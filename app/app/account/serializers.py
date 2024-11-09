@@ -24,10 +24,11 @@ class TransactionSerializers(serializers.ModelSerializer):
         read_only_fields = ["transaction_id", "created_at"]
 
     def validate_account_id(self, account_id):
-        # check if its string
-        print(account_id)
+        """
+        Validate account_id for UUID and check if Account exists or not
+        """
+        # check if its valid UUID
         try:
-            # This will raise a ValueError if `value` is not a valid UUID string
             uuid.UUID(account_id, version=4)
         except (ValueError, TypeError):
             raise serializers.ValidationError("account_id must be a valid UUID string.")

@@ -1,6 +1,4 @@
-from django.shortcuts import render
 from rest_framework import viewsets, status, mixins
-from rest_framework.response import Response
 
 from app.account.models import Account, Transaction
 from app.account.serializers import AccountSerializers, TransactionSerializers
