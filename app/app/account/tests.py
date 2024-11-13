@@ -2,7 +2,7 @@ import uuid
 from rest_framework.test import APITestCase
 from rest_framework.exceptions import ValidationError
 from app.account.models import Account, Transaction
-from app.account.serializers import TransactionSerializers
+from app.account.serializers import TransactionSerializer
 
 class TransactionSerializerTest(APITestCase):
 
@@ -18,7 +18,7 @@ class TransactionSerializerTest(APITestCase):
             "account_id": 12345,  # Invalid UUID format
             "amount": 50
         }
-        serializer = TransactionSerializers(data=data)
+        serializer = TransactionSerializer(data=data)
         with self.assertRaises(ValidationError):
             serializer.is_valid(raise_exception=True)
 
@@ -31,7 +31,7 @@ class TransactionSerializerTest(APITestCase):
             "account_id": new_account_id,
             "amount": 50
         }
-        serializer = TransactionSerializers(data=data)
+        serializer = TransactionSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
@@ -47,7 +47,7 @@ class TransactionSerializerTest(APITestCase):
             "account_id": str(self.existing_account.account_id),
             "amount": 25
         }
-        serializer = TransactionSerializers(data=data)
+        serializer = TransactionSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
@@ -62,7 +62,7 @@ class TransactionSerializerTest(APITestCase):
             "account_id": str(self.existing_account.account_id),
             "amount": 20
         }
-        serializer = TransactionSerializers(data=data)
+        serializer = TransactionSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         transaction = serializer.save()
 

@@ -1,14 +1,14 @@
 from rest_framework import viewsets, status, mixins
 
 from app.account.models import Account, Transaction
-from app.account.serializers import AccountSerializers, TransactionSerializers
+from app.account.serializers import AccountSerializer, TransactionSerializer
 
 class AccountViewSet(viewsets.ReadOnlyModelViewSet):
     """
     Fetch Account detail (account_id and balance) by account_id
     """
     queryset = Account.objects.all()
-    serializer_class = AccountSerializers
+    serializer_class = AccountSerializer
 
 
 class TransactionViewSet(mixins.CreateModelMixin,
@@ -19,5 +19,5 @@ class TransactionViewSet(mixins.CreateModelMixin,
     Listing and creating transactions
     """
     queryset = Transaction.objects.all()
-    serializer_class = TransactionSerializers
+    serializer_class = TransactionSerializer
 

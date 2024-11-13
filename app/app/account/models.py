@@ -21,5 +21,20 @@ class Transaction(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Made an transaction {self.transaction_id} with Amount {self.amount} on Account {self.account.account_id} at {self.created_at}"
+        return f"Made an transaction with Amount {self.amount} at {self.created_at}"
+    
+    def save(
+        self,
+        *args,
+        force_insert=False,
+        force_update=False,
+        using=None,
+        update_fields=None,
+    ):
+        self.account.balance += self.amount
+        self.account.save()
+        super().save(*args)
+
+    class Meta:
+        ordering = ["-created_at"]
 
