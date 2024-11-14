@@ -1,5 +1,5 @@
 import uuid
-from django.db import models
+from django.db import models, transaction
 
 class Account(models.Model):
     """
@@ -31,9 +31,11 @@ class Transaction(models.Model):
         using=None,
         update_fields=None,
     ):
-        self.account.balance += self.amount
-        self.account.save()
-        super().save(*args)
+        with transaction.atomic():
+            if self._state.adding:
+                self.account.balance += self.amount
+                self.account.save()
+            super().save(*args)
 
     class Meta:
         ordering = ["-created_at"]
